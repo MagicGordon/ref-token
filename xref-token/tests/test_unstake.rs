@@ -22,7 +22,7 @@ fn test_unstake(){
 
     assert_eq!(to_yocto("90"), view!(ref_contract.ft_balance_of(user.valid_account_id())).unwrap_json::<U128>().0);
     let current_xref_info = view!(xref_contract.contract_metadata()).unwrap_json::<ContractMetadata>();
-    assert_xref(None, &current_xref_info, 0, to_yocto("10"), to_yocto("10"));
+    assert_xref(&current_xref_info, 0, to_yocto("10"), to_yocto("10"));
     assert_eq!(100000000_u128, view!(xref_contract.get_virtual_price()).unwrap_json::<U128>().0);
 
     call!(
@@ -34,7 +34,7 @@ fn test_unstake(){
 
     assert_eq!(to_yocto("100"), view!(ref_contract.ft_balance_of(user.valid_account_id())).unwrap_json::<U128>().0);
     let current_xref_info = view!(xref_contract.contract_metadata()).unwrap_json::<ContractMetadata>();
-    assert_xref(None, &current_xref_info, 0, 0, 0);
+    assert_xref(&current_xref_info, 0, 0, 0);
     assert_eq!(100000000_u128, view!(xref_contract.get_virtual_price()).unwrap_json::<U128>().0);
 }
 
@@ -53,7 +53,7 @@ fn test_unstake_empty_total_supply(){
 
     assert_eq!(to_yocto("100"), view!(ref_contract.ft_balance_of(user.valid_account_id())).unwrap_json::<U128>().0);
     let current_xref_info = view!(xref_contract.contract_metadata()).unwrap_json::<ContractMetadata>();
-    assert_xref(None, &current_xref_info, 0, 0, 0);
+    assert_xref(&current_xref_info, 0, 0, 0);
 }
 
 #[test]
@@ -70,7 +70,7 @@ fn test_unstake_not_enough_balance(){
 
     assert_eq!(to_yocto("90"), view!(ref_contract.ft_balance_of(user.valid_account_id())).unwrap_json::<U128>().0);
     let current_xref_info = view!(xref_contract.contract_metadata()).unwrap_json::<ContractMetadata>();
-    assert_xref(None, &current_xref_info, 0, to_yocto("10"), to_yocto("10"));
+    assert_xref(&current_xref_info, 0, to_yocto("10"), to_yocto("10"));
     assert_eq!(100000000_u128, view!(xref_contract.get_virtual_price()).unwrap_json::<U128>().0);
 
     let out_come = call!(
@@ -83,6 +83,6 @@ fn test_unstake_not_enough_balance(){
 
     assert_eq!(to_yocto("90"), view!(ref_contract.ft_balance_of(user.valid_account_id())).unwrap_json::<U128>().0);
     let current_xref_info = view!(xref_contract.contract_metadata()).unwrap_json::<ContractMetadata>();
-    assert_xref(None, &current_xref_info, 0, to_yocto("10"), to_yocto("10"));
+    assert_xref(&current_xref_info, 0, to_yocto("10"), to_yocto("10"));
     assert_eq!(100000000_u128, view!(xref_contract.get_virtual_price()).unwrap_json::<U128>().0);
 }
